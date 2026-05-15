@@ -107,3 +107,28 @@ Route::prefix('/kitchen')->middleware(['auth', 'role:Kitchen'])->group(function 
 Route::prefix('/it')->middleware(['auth', 'role:IT'])->group(function () {
     Route::get('/user-management', UserManagement::class)->name('it.user-management');
 });
+
+// ================= EASTER EGG START =================
+Route::get('/kopi-rahasia', function () {
+    // Menjalankan mesin pembuat kopi di belakang layar
+    \Illuminate\Support\Facades\Artisan::call('app:seduh-kopi');
+    
+    // Menampilkan hasil ASCII kopi ke layar browser dengan gaya Hacker
+    return '<body style="background-color: #111; color: #0f0; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; font-family: monospace; font-size: 20px; font-weight: bold;">
+        <pre>
+               (  )   (   )  )
+                ) (   )  (  (
+                ( )  (    ) )
+                _____________
+               <_____________> ___
+               |             |/ _ \
+               |               | | |
+               |               |_| |
+            ___|             |\___/
+           /    \___________/    \
+           \_____________________/
+        </pre>
+        <p style="margin-top: 20px;">☕ Kopi virtual siap! Mesin POS berjalan lancar. Tetap semangat bosku! 🚀</p>
+    </body>';
+});
+// ================= EASTER EGG END =================
